@@ -1,3 +1,17 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "useDefineForClassFields": true,
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "lib": ["esnext"],
+    "baseUrl": "." ,
+    "paths": {
+      "*": ["src/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/index/*"],
+      "@shared/*": ["src/shared/index/*"],
+      "@screens/*": ["src/screens/index/*"]
+
+    },
+  }
 }
