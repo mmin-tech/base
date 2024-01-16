@@ -10,9 +10,10 @@ module.exports = {
           '@components': './src/components/index',
           '@shared': './src/shared/index',
           '@screens': './src/screens/index',
-
+          '@navigations': './src/navigations/index',
         },
       },
     ],
+    'react-native-reanimated/plugin',
   ],
 };
