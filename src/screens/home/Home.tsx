@@ -1,36 +1,40 @@
 import React, {FC, useState} from 'react';
-import {Appearance, Text, View} from 'react-native';
-import {appStyles} from 'shared';
-import {Button} from 'components';
+import {Appearance, StyleSheet, Text, View} from 'react-native';
+import {Button, Container} from 'components';
 import setColorScheme = Appearance.setColorScheme;
 import {Canvas, Mask, Group, Circle, Rect} from '@shopify/react-native-skia';
-
+import {useSharedValue, withSpring, withTiming} from 'react-native-reanimated';
+import {appStyles, darkTheme, dimension, lightTheme} from 'shared';
+import {wait} from 'utils';
 type Props = {};
+const r = 128;
+
 const Home: FC<Props> = () => {
   const [theme, setTheme] = useState(Appearance.getColorScheme());
+  const circle = useSharedValue(0);
   const onPress = () => {
+    circle.value = withTiming(dimension.heightScreen * 2, {duration: 1000});
     const temp = theme === 'light' ? 'dark' : 'light';
-    setTheme(temp);
-    setColorScheme(temp);
+    wait(500).then(() => {
+      setColorScheme(temp);
+    });
+    wait(800).then(() => {
+      setTheme(temp);
+      circle.value = 0;
+    });
   };
-
+  const color =
+    theme === 'dark'
+      ? lightTheme.colors.background
+      : darkTheme.colors.background;
   return (
-    <View>
-      <Canvas style={{width: 256, height: 256}}>
-        <Mask
-          mode="luminance"
-          mask={
-            <Group>
-              <Circle cx={128} cy={128} r={128} color="white" />
-              <Circle cx={128} cy={128} r={64} color="black" />
-            </Group>
-          }>
-          <Rect x={0} y={0} width={256} height={256} color="lightblue" />
-        </Mask>
+    <Container style={appStyles.center}>
+      <Canvas style={StyleSheet.absoluteFill} pointerEvents={'none'}>
+        <Circle cx={r} cy={r} r={circle} color={color} />
       </Canvas>
-      <Button title={'Change'} onPress={onPress} />
+      <Button title={theme?.toString()} onPress={onPress} />
       <Text>Home</Text>
-    </View>
+    </Container>
   );
 };
 export default Home;

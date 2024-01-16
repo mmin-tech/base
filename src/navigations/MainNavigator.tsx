@@ -15,7 +15,11 @@ const MainNavigator = () => {
         headerBackTitleVisible: false,
         headerTitleAlign: 'left',
       }}>
-      <MainStack.Screen name={'Home'} component={Home} />
+      <MainStack.Screen
+        options={{headerShown: false}}
+        name={'Home'}
+        component={Home}
+      />
     </MainStack.Navigator>
   );
 };

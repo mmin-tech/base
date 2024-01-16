@@ -2,7 +2,7 @@ import {DefaultTheme} from '@react-navigation/native';
 import type {Theme} from '@react-navigation/native/src/types';
 
 const defaultColor = {};
-const lightTheme: Theme = {
+export const lightTheme: Theme = {
   ...DefaultTheme,
   colors: {
     ...defaultColor,
@@ -11,7 +11,7 @@ const lightTheme: Theme = {
   },
 };
 
-const darkTheme = {
+export const darkTheme = {
   dark: false,
   colors: {
     ...defaultColor,
@@ -23,5 +23,3 @@ const darkTheme = {
     notification: 'rgb(255, 59, 48)',
   },
 };
-
-export {lightTheme, darkTheme};

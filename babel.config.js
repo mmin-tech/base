@@ -11,6 +11,8 @@ module.exports = {
           '@shared': './src/shared/index',
           '@screens': './src/screens/index',
           '@navigations': './src/navigations/index',
+          '@utils': './src/utils/index',
+
         },
       },
     ],

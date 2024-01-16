@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import {KeyboardAvoidingView, Platform, View, ViewStyle} from 'react-native';
+import {useTheme} from '@react-navigation/native';
 
 type Props = {
   children?: JSX.Element | JSX.Element[];
@@ -13,8 +14,9 @@ const Container: FC<Props> = ({
   children,
   removeIOS = false,
   keyboardVerticalOffset = 0,
-  backgroundColor = 'white',
 }) => {
+  const {colors} = useTheme();
+  const backgroundColor = colors.background;
   return (
     <View style={{flex: 1}}>
       {!removeIOS && Platform.OS === 'ios' ? (
